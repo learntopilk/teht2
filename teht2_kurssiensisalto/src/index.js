@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const Yhteensa = (props) => {
-    let x = 0;
-    props.osat.forEach(element => {
-        x += element.tehtavia
-    });
+const Yhteensa = ({osat}) => {
+    
+    let values = osat.map(osa => osa.tehtavia)
+    let reducer = (accum, val) => accum + val
+    let x = values.reduce(reducer)
+    
     return (
         <div>
             <p>Yhteensä {x} tehtävää</p>
