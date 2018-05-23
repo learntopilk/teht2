@@ -1,74 +1,53 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-
-const Otsikko = (props) => {
-    return (
-        <div>
-            <h1>{props.kurssi}</h1>
-        </div>
-    )
-}
-
-const Sisalto = (props) => {
-    return (
-        <div>
-            <Osa osa={props.osat[0].nimi} tehtavia={props.osat[0].tehtavia} />
-            <Osa osa={props.osat[1].nimi} tehtavia={props.osat[1].tehtavia} />
-            <Osa osa={props.osat[2].nimi} tehtavia={props.osat[2].tehtavia} />
-
-        </div>
-    )
-}
-
-const Osa = (props) => {
-    return (
-        <div>
-            <p>{props.osa} {props.tehtavia}</p>
-        </div>
-    )
-}
-
-const Yhteensa = (props) => {
-    let x = 0;
-    props.osat.forEach(element => {
-        x += element.tehtavia
-    });
-    return (
-        <div>
-            <p>Yhteensä {x} tehtävää</p>
-        </div>
-    )
-}
+import Kurssi from './components/Kurssi'
 
 const App = () => {
-    const kurssi = {
+    const kurssit = [
+      {
         nimi: 'Half Stack -sovelluskehitys',
+        id: 1,
         osat: [
-            {
-                nimi: 'Reactin perusteet',
-                tehtavia: 10
-            },
-            {
-                nimi: 'Tiedonvälitys propseilla',
-                tehtavia: 7
-            },
-            {
-                nimi: 'Komponenttien tila',
-                tehtavia: 14
-            }
+          {
+            nimi: 'Reactin perusteet',
+            tehtavia: 10,
+            id: 1
+          },
+          {
+            nimi: 'Tiedonvälitys propseilla',
+            tehtavia: 7,
+            id: 2
+          },
+          {
+            nimi: 'Komponenttien tila',
+            tehtavia: 14,
+            id: 3
+          }
         ]
-    }
-
+      },
+      {
+        nimi: 'Node.js',
+        id: 2,
+        osat: [
+          {
+            nimi: 'Routing',
+            tehtavia: 3,
+            id: 1
+          },
+          {
+            nimi: 'Middlewaret',
+            tehtavia: 7,
+            id: 2
+          }
+        ]
+      }
+    ]
     return (
         <div>
-            <Otsikko kurssi={kurssi.nimi} />
-            <Sisalto osat={kurssi.osat} />
-            <Yhteensa osat={kurssi.osat} />
+            <h1>Opetetaan seuraavat kurssit</h1>
+            {kurssit.map(kurssi => <Kurssi kurssi={kurssi} key={kurssi.id}/>)}
+            
         </div>
     )
 }
 
-ReactDOM.render(
-    <App />,
-    document.getElementById('root')
-)
+export default App
