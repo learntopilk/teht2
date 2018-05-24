@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from "react-dom";
 
 const Name = ({ name }) => {
-    return (
-        <div>{name}</div>
-    )
+    return <span>name: {name}   </span>
+}
+
+const Number = ({ number }) => {
+    return <span>number: {number}   </span>
 }
 
 class App extends React.Component {
@@ -12,9 +14,13 @@ class App extends React.Component {
         super(props)
         this.state = {
             persons: [
-                { name: 'Arto Hellas' }
+                {
+                    name: 'Arto Hellas',
+                    number: '0505884443'
+                }
             ],
-            newName: ''
+            newName: '',
+            newNumber: ''
         }
     }
 
@@ -23,13 +29,13 @@ class App extends React.Component {
         console.log(this.state.newName)
 
         if (this.state.newName !== '') {
-            
+
             let arr = this.state.persons
             if (!arr.some(x => x.name === this.state.newName)) {
-                arr.push({ name: this.state.newName })
-                this.setState({ persons: arr, newName: '' }, console.log("Another soul saved!", this.state.persons))
+                arr.push({ name: this.state.newName, number: this.state.newNumber })
+                this.setState({ persons: arr, newName: '', newNumber: '' }, console.log("Another soul saved!", this.state.persons))
             } else {
-                console.log("Name already in store!")
+                console.log("Contact already in store!")
             }
         }
     }
@@ -38,7 +44,10 @@ class App extends React.Component {
         console.log(event.target.value)
         this.setState({ newName: event.target.value })
     }
-
+    onNumberFieldChange = (event) => {
+        console.log(event.target.value)
+        this.setState({ newNumber: event.target.value })
+    }
     render() {
         return (
             <div>
@@ -47,13 +56,22 @@ class App extends React.Component {
                     <div>
                         nimi: <input value={this.state.newName} onChange={this.onTextFieldChange} />
                     </div>
+                    <div>puhelinnumaro: <input value={this.state.newNumber} onChange={this.onNumberFieldChange} /></div>
                     <div>
                         <button type="submit">lisää</button>
                     </div>
                 </form>
                 <div>debug: {this.state.newName}</div>
                 <h2>Numerot</h2>
-                {this.state.persons.map(person => <Name name={person.name} key={person.name.concat(Date.now())} />)}
+                {this.state.persons.map(person => {
+                    return (
+                        <div key={person.name.concat(person.number)}>
+                            <Name name={person.name} key={person.name.concat(Date.now())} />
+                            <Number number={person.number} key={person.number} />
+                        </div>
+                    )
+
+                })}
 
             </div>
         )
