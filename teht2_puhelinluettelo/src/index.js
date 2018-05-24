@@ -14,13 +14,17 @@ class App extends React.Component {
         super(props)
         this.state = {
             persons: [
-                {
-                    name: 'Arto Hellas',
-                    number: '0505884443'
-                }
+                { name: 'Arto Hellas', number: '040-123456' },
+                { name: 'Martti Tienari', number: '040-123456' },
+                { name: 'Arto Järvinen', number: '040-123456' },
+                { name: 'Lea Kutvonen', number: '040-123456' },
+                { name: 'Karita Mattila', number: '040-123456' },
+                { name: 'Marita Kattila', number: '040-123456' },
+                { name: 'Sven Varjonen', number: '040-123456' }
             ],
             newName: '',
-            newNumber: ''
+            newNumber: '',
+            searchTerm: ''
         }
     }
 
@@ -48,9 +52,19 @@ class App extends React.Component {
         console.log(event.target.value)
         this.setState({ newNumber: event.target.value })
     }
+
+    onFilterFieldChange = (event) => {
+        this.setState({searchTerm: event.target.value})
+    }
+
     render() {
+        const naytettavat = 
+        this.state.searchTerm === '' ? 
+        this.state.persons : 
+        this.state.persons.filter(person => person.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
         return (
             <div>
+                hakutermi: <input onChange={this.onFilterFieldChange}/>
                 <h2>Puhelinluettelo</h2>
                 <form onSubmit={this.addEntry}>
                     <div>
@@ -63,7 +77,7 @@ class App extends React.Component {
                 </form>
                 <div>debug: {this.state.newName}</div>
                 <h2>Numerot</h2>
-                {this.state.persons.map(person => {
+                {naytettavat.map(person => {
                     return (
                         <div key={person.name.concat(person.number)}>
                             <Name name={person.name} key={person.name.concat(Date.now())} />
