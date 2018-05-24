@@ -23,17 +23,13 @@ class App extends React.Component {
         console.log(this.state.newName)
 
         if (this.state.newName !== '') {
-            let found = false
-            this.state.persons.forEach(person => {
-                if (person.name === this.state.newName) {
-                    found = true
-                }
-            })
-
-            if (!found) {
-                let arr = this.state.persons
+            
+            let arr = this.state.persons
+            if (!arr.some(x => x.name === this.state.newName)) {
                 arr.push({ name: this.state.newName })
-                this.setState({ persons: arr, newName: '' }, console.log(this.state.persons))
+                this.setState({ persons: arr, newName: '' }, console.log("Another soul saved!", this.state.persons))
+            } else {
+                console.log("Name already in store!")
             }
         }
     }
