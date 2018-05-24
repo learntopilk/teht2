@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from "react-dom";
+import NumberForm from './components/NumberForm'
+import Contact from './components/Contact'
 
-const Name = ({ name }) => {
-    return <span>name: {name}   </span>
-}
 
-const Number = ({ number }) => {
-    return <span>number: {number}   </span>
+const Filter = ({ funk }) => {
+    return <div><span>Hakutermi: </span><input onChange={funk} /></div>
 }
 
 class App extends React.Component {
@@ -54,37 +53,26 @@ class App extends React.Component {
     }
 
     onFilterFieldChange = (event) => {
-        this.setState({searchTerm: event.target.value})
+        this.setState({ searchTerm: event.target.value })
     }
 
     render() {
-        const naytettavat = 
-        this.state.searchTerm === '' ? 
-        this.state.persons : 
-        this.state.persons.filter(person => person.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+        const naytettavat =
+            this.state.searchTerm === '' ?
+                this.state.persons :
+                this.state.persons.filter(person => person.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
         return (
             <div>
-                hakutermi: <input onChange={this.onFilterFieldChange}/>
+                <Filter funk={this.onFilterFieldChange} />
                 <h2>Puhelinluettelo</h2>
-                <form onSubmit={this.addEntry}>
-                    <div>
-                        nimi: <input value={this.state.newName} onChange={this.onTextFieldChange} />
-                    </div>
-                    <div>puhelinnumaro: <input value={this.state.newNumber} onChange={this.onNumberFieldChange} /></div>
-                    <div>
-                        <button type="submit">lisää</button>
-                    </div>
-                </form>
+                <NumberForm thi={this} />
+
                 <div>debug: {this.state.newName}</div>
                 <h2>Numerot</h2>
                 {naytettavat.map(person => {
                     return (
-                        <div key={person.name.concat(person.number)}>
-                            <Name name={person.name} key={person.name.concat(Date.now())} />
-                            <Number number={person.number} key={person.number} />
-                        </div>
+                        <Contact person={person} key={person.name.concat(person.number)} />
                     )
-
                 })}
 
             </div>
