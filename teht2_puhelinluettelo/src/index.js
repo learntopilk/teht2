@@ -21,10 +21,20 @@ class App extends React.Component {
     addEntry = (event) => {
         event.preventDefault();
         console.log(this.state.newName)
+
         if (this.state.newName !== '') {
-            let arr = this.state.persons
-            arr.push({ name: this.state.newName })
-            this.setState({ persons: arr, newName: '' }, console.log(this.state.persons))
+            let found = false
+            this.state.persons.forEach(person => {
+                if (person.name === this.state.newName) {
+                    found = true
+                }
+            })
+
+            if (!found) {
+                let arr = this.state.persons
+                arr.push({ name: this.state.newName })
+                this.setState({ persons: arr, newName: '' }, console.log(this.state.persons))
+            }
         }
     }
 
@@ -48,8 +58,8 @@ class App extends React.Component {
                 <div>debug: {this.state.newName}</div>
                 <h2>Numerot</h2>
                 {this.state.persons.map(person => <Name name={person.name} key={person.name.concat(Date.now())} />)}
-                
-      </div>
+
+            </div>
         )
     }
 }
