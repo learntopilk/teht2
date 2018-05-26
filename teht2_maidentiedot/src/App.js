@@ -7,8 +7,9 @@ const SearchBar = ({ onC, val }) => {
   )
 }
 
-const ResultDisplay = ({fun}) => {
-  let m = fun()
+const ResultDisplay = ({filterFunc, countryC}) => {
+
+  let m = filterFunc()
   console.log("m", m)
 
 
@@ -22,14 +23,14 @@ const ResultDisplay = ({fun}) => {
   } else {
     return (
       <div>
-        {m.map(c => <OneCountry key={c.name.concat(Date.now())} country={c} />)}
+        {m.map(c => <OneCountry key={c.name.concat(Date.now())} country={c} onC={countryC} />)}
       </div>
     )
   }
 }
 
-const OneCountry = ({ country }) => {
-  return (<div>{country.name}</div>)
+const OneCountry = ({ country, onC }) => {
+  return (<div value={country.name} onClick={onC}>{country.name}</div>)
 }
 
 const DetailedCountry = ({country}) => {
@@ -69,19 +70,25 @@ class App extends Component {
   }
 
   filterCountries = () => {
+    console.log("filtering using the following: ", this.state.searchTerm)
     return this.state.countries.filter(country => country.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
   }
 
   onSearchBarChange = (event) => {
-    console.log(event.target.value)
     this.setState({ searchTerm: event.target.value })
+  }
+  onCountryClick = (event) => {
+    console.log("event target: ", event.target)
+    console.log("country value: ", event.target.textContent)
+    
+    this.setState({searchTerm: event.target.textContent})
   }
 
   render() {
     return (
       <div className="App">
         <SearchBar onC={this.onSearchBarChange} val={this.state.searchTerm} />
-        <ResultDisplay fun={this.filterCountries} />
+        <ResultDisplay filterFunc={this.filterCountries} countryC={this.onCountryClick}/>
       </div>
     );
   }
