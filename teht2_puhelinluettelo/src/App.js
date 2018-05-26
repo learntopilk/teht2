@@ -1,7 +1,7 @@
 import React from 'react';
 import NumberForm from './components/NumberForm'
 import Contact from './components/Contact'
-import axios from 'axios'
+import db from './DBTouch'
 
 const Filter = ({ funk }) => {
     return <div><span>Hakutermi: </span><input onChange={funk} /></div>
@@ -20,8 +20,8 @@ class App extends React.Component {
 
     componentDidMount() {
         console.log("Starting fetch process")
-        axios
-            .get("http://localhost:3002/persons")
+        db
+            .getAll()
             .then((response) => {
                 console.log("Dis be da promsies FULFILLED!", response.data)
                 this.setState({ persons: response.data })
@@ -38,14 +38,14 @@ class App extends React.Component {
             if (!arr.some(x => x.name === this.state.newName)) {
 
                 let newPerson = { name: this.state.newName, number: this.state.newNumber }
-                axios
-                    .post("http://localhost:3002/persons", newPerson)
-                    .then(res => {
-                        console.log("res: ", res)
-                        console.log("Another soul saved!", res.data)
-                        this.setState({persons: this.state.persons.concat(res.data), newName: '', newNumber: ''})  
-                    })
-                    .catch(error => console.log("error:", error))
+                db
+                .create(newPerson)
+                .then(res => {
+                    console.log("res: ", res)
+                    console.log("Another soul saved!", res.data)
+                    this.setState({persons: this.state.persons.concat(res.data), newName: '', newNumber: ''})  
+                })
+                .catch(error => console.log("error:", error))
 
             } else {
                 console.log("Contact already in store!")
