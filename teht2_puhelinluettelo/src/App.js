@@ -91,6 +91,11 @@ class App extends React.Component {
                                 console.log("State updated after updating existing contact in DB")
                             })
                         })
+                        .error((err) => {
+                            console.log("Error while updating: ", err)
+                            this.setState({message: "Yhteyshenkilöä päivitettäessä tapahtui virhe, todennäköisesti yhteystieto on jo poistettu."})
+
+                        })
                 } else {
                     this.setState({
                         message: "Henkilö löytyy jo tiedoista!"
