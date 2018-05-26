@@ -1,34 +1,24 @@
 {
   "persons": [
     {
-      "name": "mark",
-      "number": "bark",
-      "id": 1
-    },
-    {
-      "name": "mark shark tank",
-      "number": "040-333333",
-      "id": 2
-    },
-    {
-      "name": "lark clark",
-      "number": "030-222222",
-      "id": 3
-    },
-    {
-      "name": "tank turk",
-      "number": "2490t8724987",
-      "id": 4
-    },
-    {
-      "name": "Marko Heikkilä",
-      "number": "010-01010101",
-      "id": 5
-    },
-    {
       "name": "Sergei Sarkahousu",
       "number": "1049348796",
       "id": 6
+    },
+    {
+      "name": "Martti Särmä",
+      "number": "400-125892",
+      "id": 11
+    },
+    {
+      "name": "Sirkka Hähmä",
+      "number": "090-1231234",
+      "id": 12
+    },
+    {
+      "name": "Seppo Semivaara",
+      "number": "001-kunnonhyvä",
+      "id": 13
     }
   ]
 }

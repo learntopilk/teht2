@@ -69,11 +69,17 @@ class App extends React.Component {
     onDeleteButtonPress = (id) => {
         return () => {
             console.log("Delete button launched, id: ", id) 
-            db
-            .remove(id)
-            .then(res => {
-                console.log("response to deletion: " , res)
-            })
+            if(!window.confirm("Haluatko oikeasti poistaa yhteystiedon?")) {
+                return
+            } else {
+                db
+                .remove(id)
+                .then(res => {
+                    console.log("response to deletion: " , res)
+                    this.componentDidMount();
+                })
+            }
+
         }
 
     }
