@@ -17,6 +17,8 @@ const ResultDisplay = ({fun}) => {
     return (<div>No hits!</div>)
   } else if (m.length > 10) {
     return (<div>Too many hits to display at once!</div>)
+  } else if (m.length === 1) {
+    return <DetailedCountry country={m[0]}/>
   } else {
     return (
       <div>
@@ -28,6 +30,21 @@ const ResultDisplay = ({fun}) => {
 
 const OneCountry = ({ country }) => {
   return (<div>{country.name}</div>)
+}
+
+const DetailedCountry = ({country}) => {
+  let imgstyle = {
+    width: '350px'
+  }
+  return (
+    <div>
+      <h4>{country.name} {country.altSpellings[3]}</h4>
+      <img src={country.flag} style={imgstyle} alt="the flag of {country.name}"/>
+      <p>capital: {country.capital}</p>
+      <p>population: {country.population}</p>
+      <p>capital: {country.capital}</p>
+    </div>
+  )
 }
 
 class App extends Component {
