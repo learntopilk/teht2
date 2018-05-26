@@ -1,44 +1,34 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
+      "name": "mark",
+      "number": "bark",
       "id": 1
     },
     {
-      "name": "Martti Tienari",
-      "number": "040-123456",
+      "name": "mark shark tank",
+      "number": "040-333333",
       "id": 2
     },
     {
-      "name": "Arto Järvinen",
-      "number": "040-123456",
+      "name": "lark clark",
+      "number": "030-222222",
       "id": 3
     },
     {
-      "name": "Lea Kutvonen",
-      "number": "040-123456",
+      "name": "tank turk",
+      "number": "2490t8724987",
       "id": 4
     },
     {
-      "name": "Martti Mahtisaari",
-      "number": "313-nobelvoittaja",
+      "name": "Marko Heikkilä",
+      "number": "010-01010101",
       "id": 5
     },
     {
-      "name": "Pertti Sinkola",
-      "number": "142-luontomies",
+      "name": "Sergei Sarkahousu",
+      "number": "1049348796",
       "id": 6
-    },
-    {
-      "name": "Marto Lindström",
-      "number": "555-134613",
-      "id": 7
-    },
-    {
-      "name": "Seija Siltasaari",
-      "number": "948-ösalgjhaökjh",
-      "id": 8
     }
   ]
 }

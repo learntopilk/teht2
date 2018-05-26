@@ -9,12 +9,13 @@ const Number = ({ number }) => {
     return <span>number: {number}   </span>
 }
 
-const Contact = ({person}) => {
+const Contact = ({person, action}) => {
     return (
-        <div>
-            <Name name={person.name} key={person.name.concat(Date.now())} />
-            <Number number={person.number} key={person.number} />
-        </div>
+        <tr>
+            <td><Name name={person.name} key={person.name.concat(Date.now())} /> </td>
+            <td><Number number={person.number} key={person.number} /></td>
+            <td><button onClick={action(person.id)}>Delete this</button></td>
+        </tr>
     )
 }
 

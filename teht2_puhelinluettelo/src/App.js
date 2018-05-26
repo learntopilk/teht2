@@ -39,13 +39,13 @@ class App extends React.Component {
 
                 let newPerson = { name: this.state.newName, number: this.state.newNumber }
                 db
-                .create(newPerson)
-                .then(res => {
-                    console.log("res: ", res)
-                    console.log("Another soul saved!", res.data)
-                    this.setState({persons: this.state.persons.concat(res.data), newName: '', newNumber: ''})  
-                })
-                .catch(error => console.log("error:", error))
+                    .create(newPerson)
+                    .then(res => {
+                        console.log("res: ", res)
+                        console.log("Another soul saved!", res.data)
+                        this.setState({ persons: this.state.persons.concat(res.data), newName: '', newNumber: '' })
+                    })
+                    .catch(error => console.log("error:", error))
 
             } else {
                 console.log("Contact already in store!")
@@ -66,6 +66,18 @@ class App extends React.Component {
         this.setState({ searchTerm: event.target.value })
     }
 
+    onDeleteButtonPress = (id) => {
+        return () => {
+            console.log("Delete button launched, id: ", id) 
+            db
+            .remove(id)
+            .then(res => {
+                console.log("response to deletion: " , res)
+            })
+        }
+
+    }
+
     render() {
         const naytettavat =
             this.state.searchTerm === '' ?
@@ -79,11 +91,17 @@ class App extends React.Component {
 
                 <div>debug: {this.state.newName}</div>
                 <h2>Numerot</h2>
-                {naytettavat.map(person => {
-                    return (
-                        <Contact person={person} key={person.name.concat(person.number)} />
-                    )
-                })}
+                <table>
+                    <tbody>
+                        {naytettavat.map(person => {
+                            return (
+                                
+                                    <Contact person={person} action={this.onDeleteButtonPress} key={person.name.concat(person.number)} />
+                                
+                            )
+                        })}
+                    </tbody>
+                </table>
 
             </div>
         )
