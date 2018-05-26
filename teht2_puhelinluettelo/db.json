@@ -19,6 +19,16 @@
       "name": "Seppo Semivaara",
       "number": "001-kunnonhyvä",
       "id": 13
+    },
+    {
+      "name": "Sami Sukko",
+      "number": "111-123123",
+      "id": 14
+    },
+    {
+      "name": "Leena Sumppu",
+      "number": "111-234",
+      "id": 15
     }
   ]
 }

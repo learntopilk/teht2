@@ -34,21 +34,38 @@ class App extends React.Component {
 
         if (this.state.newName !== '') {
 
-            let arr = this.state.persons
-            if (!arr.some(x => x.name === this.state.newName)) {
+            let existingPersonIndex = this.state.persons.findIndex(person => person.name === this.state.newName)
 
+            if (existingPersonIndex === -1) {
                 let newPerson = { name: this.state.newName, number: this.state.newNumber }
                 db
                     .create(newPerson)
                     .then(res => {
-                        console.log("res: ", res)
                         console.log("Another soul saved!", res.data)
                         this.setState({ persons: this.state.persons.concat(res.data), newName: '', newNumber: '' })
                     })
                     .catch(error => console.log("error:", error))
 
             } else {
+
+                if(window.confirm(`${this.state.persons[existingPersonIndex].name} on jo olemassa. Haluatko päivittää yhteystiedon?`)) {
+                    let id = this.state.persons[existingPersonIndex].id
+                    let newPerson = { name: this.state.persons[existingPersonIndex].name, number: this.state.newNumber }
+                    db
+                        .update(id, newPerson)
+                        .then(res => {
+                            console.log("res from updating existing person: ",res)
+                            let arr = this.state.persons
+                            arr[existingPersonIndex] = newPerson
+                            this.setState({persons: arr}, console.log("State updated after updatin existing contact in DB"))
+                        })
+                } else {
+
+                }
+
                 console.log("Contact already in store!")
+
+
             }
         }
     }
